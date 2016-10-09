@@ -1,6 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Insets;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,79 +14,90 @@ import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicButtonUI;
+import javax.swing.text.html.ImageView;
 
 
 public class GUI extends JFrame{
-	public void display(JLabel la_image){
-		javax.swing.JFrame frame=new javax.swing.JFrame("OrangeRC");
-	    frame.setSize(1200,700);
-	    frame.setResizable(false);
-	    //JLabel Stu = new JLabel("学生1");
-	    JMenuBar jmb = new JMenuBar();
-	    JButton fbutton1 = new JButton("全体广播");
-	    JButton fbutton2 = new JButton("关机");
-	    JButton fbutton3 = new JButton("控制");
-	    
-	    
-	    JMenu fileMenu = new JMenu("操作");
-	    JMenu editMenu = new JMenu("作者");
-	    JMenu helpMenu = new JMenu("帮助");
-	    jmb.add(fileMenu);
-	    jmb.add(editMenu);
-	    jmb.add(helpMenu);
-	    fileMenu.add(new JMenuItem("关机"));
-	    fileMenu.add(new JMenuItem("控制"));
-	    fileMenu.add(new JMenuItem("广播"));
-	    fileMenu.addSeparator();
-	    fileMenu.add(new JMenuItem("全选"));
-	    fileMenu.addSeparator();
-	    fileMenu.add(new JMenuItem("退出"));
-	    editMenu.add(new JMenuItem("Reset113"));
-	    
-	    la_image.setSize(600, 400);
+	private JButton searchBtn = null;
+	private JButton editBtn = null;
+	private JButton saveBtn = null;
 	
-	    JLayeredPane jlp = new JLayeredPane();
-	    //JLayeredPane njlp = new JLayeredPane();
-	    jmb.setBounds(0,0,1200,30);
-	    jmb.setOpaque(true);
-	    //jmb.setBackground(Color.YELLOW);
-	    jlp.add(jmb);
+	public GUI(JLabel la_image){
+		display(la_image);
+	}
+	private JPanel addJPanel() {
+		JPanel menuPanel = new JPanel();
+		menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		// 增加文件选择按钮
+		menuPanel.add(createBtn("控制屏幕", "./image/control72x.png"));
+
+		// 增加编辑按钮
+		editBtn = createBtn("文件传输","./image/document96x.png");
+		//editBtn.setEnabled(false);
+		menuPanel.add(editBtn);
+
+		// 增加保存文件按钮
+		saveBtn = createBtn("屏幕演示", "./image/screen96x.png");
+		//saveBtn.setEnabled(false);
+		menuPanel.add(saveBtn);
+
+		// 增加查询输入文本框
+//		searchText = new JTextField();
+//		searchText.setPreferredSize(new Dimension(140, 27));
+//		menuPanel.add(searchText);
+
+		// 增加查询按钮
+		searchBtn = createBtn("开始", "./image/play96xn.png");
+		//searchBtn.setEnabled(false);
+		menuPanel.add(searchBtn);
+
+		return menuPanel;
+	}
+
+	/**
+	 * 创建工具栏按钮
+	 * 
+	 * @param text
+	 *            按钮名称
+	 * @param icon
+	 *            按钮图标所在路径
+	 * @return 返回添加样式和监听器后的按钮
+	 */
+	private JButton createBtn(String text, String icon) {
+		JButton btn = new JButton(text, new ImageIcon(icon));
+		btn.setUI(new BasicButtonUI());// 恢复基本视觉效果
+		btn.setPreferredSize(new Dimension(250, 100));// 设置按钮大小
+		btn.setContentAreaFilled(false);// 设置按钮透明
+		btn.setFont(new Font("黑体", Font.PLAIN, 20));// 按钮文本样式
+		btn.setMargin(new Insets(0, 0, 0, 0));// 按钮内容与边框距离
+		btn.addMouseListener(new RMouseListener(this));
+		return btn;
+	}
+	private void display(JLabel la_image){
+		
+		this.setSize(1320, 750);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		this.setTitle("OrangeRC");
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	    
+	    la_image.setSize(300, 200);
 	
-	    jlp.add(la_image, (Integer) (JLayeredPane.PALETTE_LAYER + 50));
-	    jlp.add(fbutton1, (Integer) (JLayeredPane.PALETTE_LAYER + 50));
-	    jlp.add(fbutton2, (Integer) (JLayeredPane.PALETTE_LAYER + 50));
-	    jlp.add(fbutton3, (Integer) (JLayeredPane.PALETTE_LAYER + 50));
-	    //jlp.add(jmb, (Integer) (JLayeredPane.POPUP_LAYER + 50));
-	    //jlp.add(Stu, (Integer) (JLayeredPane.PALETTE_LAYER + 50));
+	    JLayeredPane jlp = new JLayeredPane();  
 	    
-	    
-	    la_image.setBounds(30, 50, la_image.getWidth(),la_image.getHeight());
+	    la_image.setBounds(40, 0, la_image.getWidth(),la_image.getHeight());
 	    la_image.setOpaque(true);
+	    jlp.add(la_image);
 	    
-	    fbutton1.setBounds(1000, 80, 100, 40);
-	    fbutton1.setOpaque(true);
-	    jlp.add(fbutton1);
-	    fbutton2.setBounds(1000, 220, 100, 40);
-	    fbutton2.setOpaque(true);
-	    jlp.add(fbutton2);
-	    fbutton3.setBounds(1000, 360, 100, 40);
-	    fbutton3.setOpaque(true);
-	    jlp.add(fbutton3);
-	    //jmb.setBounds(0,0,1200,30);
-	    //Stu.setBounds(150,320,100,100);
-//	    JScrollPane jsp = new JScrollPane(jlp);
-//	    jsp.setHorizontalScrollBarPolicy(                
-//                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        jsp.setVerticalScrollBarPolicy(                
-//                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    JPanel menuPanel = addJPanel();
+	  	menuPanel.setPreferredSize(new Dimension(140, 150));
+	    
+	  	this.getContentPane().add(menuPanel,BorderLayout.NORTH);
+	    this.getContentPane().add(jlp,BorderLayout.CENTER);
         
-	    
-	    //frame.setLayeredPane(njlp);
-	    frame.setLayeredPane(jlp);
-	    //frame.setBackground(Color.orange);
-	    frame.setVisible(true);
-	    frame.setDefaultCloseOperation(3);
-	    frame.setAlwaysOnTop(true);
 	}
 }

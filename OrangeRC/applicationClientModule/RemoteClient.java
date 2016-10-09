@@ -50,8 +50,11 @@ public class RemoteClient {
             ins = new ObjectInputStream(socket.getInputStream());  
         } catch (IOException e) {  
             e.printStackTrace();  
-        }  
-        new GUI().display(la_image);
-        new Receive().run(la_image,ins);  
+        } 
+        //new GUI(ins);
+        
+        new GUI(la_image);
+        new Receive().run(la_image,ins);
+        
     }   
 }  
