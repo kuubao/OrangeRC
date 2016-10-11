@@ -26,23 +26,24 @@ import javax.swing.JScrollPane;
 
 public class RemoteClient {  
 	  
-    private JPanel contentPane;
+	JLabel la_image= new JLabel();
+	private JPanel contentPane;
     Socket socket;  
     ObjectInputStream ins;
-    javax.swing.JLabel la_image=new javax.swing.JLabel();
     
     
-    public static void main(String[] args) {  
-        Socket socket = null;  
-        try {  
-            socket = new Socket("127.0.0.1", 1113);  
-        } catch (UnknownHostException e) {  
-            e.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-        new RemoteClient(socket);  
-    }  
+    public static void main(String[] args) {
+	        Socket socket = null;  
+	        try {  
+	            socket = new Socket("127.0.0.1", 1123);  
+	        } catch (UnknownHostException e) {  
+	            e.printStackTrace();  
+	        } catch (IOException e) {  
+	            e.printStackTrace();  
+	        } 
+	        //System.out.println("dsuad;onsaju");
+	        new RemoteClient(socket);
+    }
 
     public RemoteClient(Socket socket) {  
         this.socket = socket;  
@@ -50,11 +51,9 @@ public class RemoteClient {
             ins = new ObjectInputStream(socket.getInputStream());  
         } catch (IOException e) {  
             e.printStackTrace();  
-        } 
-        //new GUI(ins);
-        
+        }
+        //new Login();
         new GUI(la_image);
         new Receive().run(la_image,ins);
-        
     }   
 }  

@@ -2,13 +2,18 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 public class RMouseListener implements MouseListener {
 
 	private GUI frame;
+	private Login frame2;
+	private AbstractButton jTextField;
 
 	public RMouseListener() {
 		// TODO Auto-generated constructor stub
@@ -17,13 +22,28 @@ public class RMouseListener implements MouseListener {
 	public RMouseListener(GUI f) {
 		this.frame = f;
 	}
-
+	
+	public RMouseListener(Login s) {
+		this.frame2 = s;
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		String btnName =((JButton)e.getSource()).getText();
-		if ("File".equals(btnName.trim())) {
-			//鼠标点击事件
+		String Keyname = frame2.jTextField.getText().trim();
+		if ("确认".equals(btnName.trim())) {
+			if("14251104235".equals(Keyname)){
+					frame2.dispose();
+					//new GUI(RemoteClient.la_image);
+				}
+			else {
+                JOptionPane.showMessageDialog(null,"用户名或密码错误！","提示",JOptionPane.ERROR_MESSAGE);	
+			}
+		}
+		if ("取消".equals(btnName.trim())){
+			frame2.jTextField.setText(null);
+			frame2.jPasswordField.setText(null);
 		}
 	}
 
@@ -61,5 +81,6 @@ public class RMouseListener implements MouseListener {
 		btn.setForeground(Color.black);// 设置字体颜色
 		btn.setBorderPainted(false);// 隐藏边框
 	}
+
 
 }

@@ -22,9 +22,10 @@ import javax.swing.text.html.ImageView;
 
 
 public class GUI extends JFrame{
-	private JButton searchBtn = null;
-	private JButton editBtn = null;
-	private JButton saveBtn = null;
+	private JButton controlBtn = null;
+	private JButton docuBtn = null;
+	private JButton screenBtn = null;
+	private JButton playBtn = null;
 	
 	public GUI(JLabel la_image){
 		display(la_image);
@@ -32,28 +33,21 @@ public class GUI extends JFrame{
 	private JPanel addJPanel() {
 		JPanel menuPanel = new JPanel();
 		menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
-		// 增加文件选择按钮
-		menuPanel.add(createBtn("控制屏幕", "./image/control72x.png"));
+		
+		controlBtn = createBtn("控制屏幕", "./image/control72x.png");
+		menuPanel.add(controlBtn);
 
-		// 增加编辑按钮
-		editBtn = createBtn("文件传输","./image/document96x.png");
-		//editBtn.setEnabled(false);
-		menuPanel.add(editBtn);
 
-		// 增加保存文件按钮
-		saveBtn = createBtn("屏幕演示", "./image/screen96x.png");
-		//saveBtn.setEnabled(false);
-		menuPanel.add(saveBtn);
+		docuBtn = createBtn("文件传输","./image/document96x.png");
+		menuPanel.add(docuBtn);
 
-		// 增加查询输入文本框
-//		searchText = new JTextField();
-//		searchText.setPreferredSize(new Dimension(140, 27));
-//		menuPanel.add(searchText);
 
-		// 增加查询按钮
-		searchBtn = createBtn("开始", "./image/play96xn.png");
-		//searchBtn.setEnabled(false);
-		menuPanel.add(searchBtn);
+		screenBtn = createBtn("屏幕演示", "./image/screen96x.png");
+		menuPanel.add(screenBtn);
+
+		
+		playBtn = createBtn("关机", "./image/shutdown64x.png");
+		menuPanel.add(playBtn);
 
 		return menuPanel;
 	}

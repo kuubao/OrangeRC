@@ -23,7 +23,7 @@ public class RemoteServer {
     public static void main(String[] args) {  
         ServerSocket server;  
         try {  
-            server = new ServerSocket(1113);  
+            server = new ServerSocket(1123);  
             st = server.accept();   
             // 两个线程，一个发送截屏，一个接收鼠标键盘并进行模拟操作  
             new SendThread(st).start();  
@@ -45,8 +45,7 @@ class SendThread extends Thread {
   
     public SendThread(Socket st) {  
         this.st = st;  
-        try {  
-  
+        try {
             robot = new Robot();  
             Point p = new Point(0, 0);  
             // 获得屏幕大小  

@@ -18,26 +18,21 @@ import javax.swing.JLabel;
 public class Receive extends Thread {  
 		boolean isAlive = true;  
 		ImageIcon icon;
-		
-	
 
 		public void run(JLabel la_image,ObjectInputStream ins) {
             try {  
                 while (isAlive) {  
-
                 	icon = (ImageIcon) ins.readObject();
- 
                     // 根据图片大小定义contentPane大小。 
                 	 Image img = icon.getImage();
                      Toolkit tk = Toolkit.getDefaultToolkit() ;
                      Dimension d =tk.getScreenSize();
-
                          int w = d.width;
                          int h =d.height;
-                            BufferedImage bi = resize(img,la_image.getWidth(),la_image.getHeight());
- 
-                            la_image.setIcon(new ImageIcon(bi));
-                            la_image.repaint();//销掉以前画的背景
+                         BufferedImage bi = resize(img,la_image.getWidth(),la_image.getHeight());
+                         
+                         la_image.setIcon(new ImageIcon(bi));
+                         la_image.repaint();//销掉以前画的背景
                     Thread.sleep(1000);  
                 }  
             } catch (Exception e1) {  
