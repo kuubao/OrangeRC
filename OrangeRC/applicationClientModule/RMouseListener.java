@@ -35,7 +35,8 @@ public class RMouseListener implements MouseListener {
 		if ("确认".equals(btnName.trim())) {
 			if("14251104235".equals(Keyname)){
 					frame2.dispose();
-					//new GUI(RemoteClient.la_image);
+					JOptionPane.showMessageDialog(null,"登陆成功！","提示",JOptionPane.DEFAULT_OPTION);
+					new GUI();
 				}
 			else {
                 JOptionPane.showMessageDialog(null,"用户名或密码错误！","提示",JOptionPane.ERROR_MESSAGE);	

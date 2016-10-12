@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.ObjectInputStream;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /** 
@@ -18,10 +19,18 @@ import javax.swing.JLabel;
 public class Receive extends Thread {  
 		boolean isAlive = true;  
 		ImageIcon icon;
-
-		public void run(JLabel la_image,ObjectInputStream ins) {
+		JButton la_image;
+		ObjectInputStream ins;
+		
+		public Receive(JButton la_image, ObjectInputStream ins) {
+			super();
+			this.la_image = la_image;
+			this.ins = ins;
+		}
+		@Override
+		public void run() {
             try {  
-                while (isAlive) {  
+                while (isAlive) { 
                 	icon = (ImageIcon) ins.readObject();
                     // 根据图片大小定义contentPane大小。 
                 	 Image img = icon.getImage();
@@ -30,9 +39,8 @@ public class Receive extends Thread {
                          int w = d.width;
                          int h =d.height;
                          BufferedImage bi = resize(img,la_image.getWidth(),la_image.getHeight());
-                         
                          la_image.setIcon(new ImageIcon(bi));
-                         la_image.repaint();//销掉以前画的背景
+                         //la_image.repaint();
                     Thread.sleep(1000);  
                 }  
             } catch (Exception e1) {  

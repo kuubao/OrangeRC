@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
+import java.io.ObjectInputStream;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.text.html.ImageView;
 
@@ -26,10 +29,15 @@ public class GUI extends JFrame{
 	private JButton docuBtn = null;
 	private JButton screenBtn = null;
 	private JButton playBtn = null;
+	JButton la_image= new JButton();
+	ObjectInputStream ins;
 	
-	public GUI(JLabel la_image){
-		display(la_image);
+	public GUI(){
+		display();
+		ins =  RemoteClient.getIns();
+		new Receive(la_image,ins).start();
 	}
+	
 	private JPanel addJPanel() {
 		JPanel menuPanel = new JPanel();
 		menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
@@ -71,27 +79,29 @@ public class GUI extends JFrame{
 		btn.addMouseListener(new RMouseListener(this));
 		return btn;
 	}
-	private void display(JLabel la_image){
+	private void display(){
 		
 		this.setSize(1320, 750);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setTitle("OrangeRC");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		JLabel jlp = new JLabel();
 	    
-	    la_image.setSize(300, 200);
-	
-	    JLayeredPane jlp = new JLayeredPane();  
 	    
-	    la_image.setBounds(40, 0, la_image.getWidth(),la_image.getHeight());
+	    la_image.setBounds(20, 20, 300,200);
 	    la_image.setOpaque(true);
+
+
 	    jlp.add(la_image);
-	    
 	    JPanel menuPanel = addJPanel();
-	  	menuPanel.setPreferredSize(new Dimension(140, 150));
+	  	menuPanel.setBorder(BorderFactory.createTitledBorder("¹¤¾ßÀ¸"));
+	  	
+	  	menuPanel.setBounds(20,500,1300, 180);
+	  	
+	  	this.getContentPane().add(menuPanel);
+	    this.getContentPane().add(jlp);
 	    
-	  	this.getContentPane().add(menuPanel,BorderLayout.NORTH);
-	    this.getContentPane().add(jlp,BorderLayout.CENTER);
-        
 	}
+
 }

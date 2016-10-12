@@ -26,13 +26,20 @@ import javax.swing.JScrollPane;
 
 public class RemoteClient {  
 	  
-	JLabel la_image= new JLabel();
+	
 	private JPanel contentPane;
     Socket socket;  
-    ObjectInputStream ins;
+    private static ObjectInputStream ins;
     
-    
-    public static void main(String[] args) {
+	public static ObjectInputStream getIns() {
+		return ins;
+	}
+
+	public static void setIns(ObjectInputStream ins) {
+		RemoteClient.ins = ins;
+	}
+
+	public static void main(String[] args) {
 	        Socket socket = null;  
 	        try {  
 	            socket = new Socket("127.0.0.1", 1123);  
@@ -40,8 +47,7 @@ public class RemoteClient {
 	            e.printStackTrace();  
 	        } catch (IOException e) {  
 	            e.printStackTrace();  
-	        } 
-	        //System.out.println("dsuad;onsaju");
+	        }
 	        new RemoteClient(socket);
     }
 
@@ -53,7 +59,6 @@ public class RemoteClient {
             e.printStackTrace();  
         }
         //new Login();
-        new GUI(la_image);
-        new Receive().run(la_image,ins);
-    }   
+        new GUI();
+    }
 }  
