@@ -3,10 +3,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.io.ObjectInputStream;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +21,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicButtonUI;
@@ -29,7 +33,7 @@ public class GUI extends JFrame{
 	private JButton docuBtn = null;
 	private JButton screenBtn = null;
 	private JButton playBtn = null;
-	JButton la_image= new JButton();
+	JLabel la_image= new JLabel();
 	ObjectInputStream ins;
 	
 	public GUI(){
@@ -86,7 +90,8 @@ public class GUI extends JFrame{
 		this.setVisible(true);
 		this.setTitle("OrangeRC");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		JLabel jlp = new JLabel();
+		this.setLayout(null);
+		JLayeredPane jlp = new JLayeredPane();
 	    
 	    
 	    la_image.setBounds(20, 20, 300,200);
@@ -95,13 +100,24 @@ public class GUI extends JFrame{
 
 	    jlp.add(la_image);
 	    JPanel menuPanel = addJPanel();
-	  	menuPanel.setBorder(BorderFactory.createTitledBorder("¹¤¾ßÀ¸"));
+	  	menuPanel.setBorder(BorderFactory.createMatteBorder(5, 10, 5, 5, Color.BLUE));
 	  	
-	  	menuPanel.setBounds(20,500,1300, 180);
+	  	menuPanel.setBounds(0,550,1300, 150);
 	  	
-	  	this.getContentPane().add(menuPanel);
-	    this.getContentPane().add(jlp);
-	    
-	}
+	  	//jlp.setLayout(new GridLayout(4,4));
+	  	jlp.setBorder(BorderFactory.createTitledBorder("ÆÁÄ»·ÖÏí"));
+	  	jlp.setBounds(0,0,1350,1080);
+	  	JScrollPane scroll = new JScrollPane(jlp);
+	  	scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//	  	scroll.setPreferredSize(new Dimension(jlp.getWidth() - 50, jlp.getHeight()/2));
+//	  	JScrollPane scr=new JScrollPane(jlp);
+//	  	scr.setHorizontalScrollBarPolicy( 
+//	  			JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
+//	  			scr.setVerticalScrollBarPolicy( 
+//	  			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
 
+	  	scroll.setBounds(0,0,jlp.getWidth() - 50, jlp.getHeight()/2);
+	  	this.getContentPane().add(menuPanel);
+	    this.getContentPane().add(scroll);
+	}
 }

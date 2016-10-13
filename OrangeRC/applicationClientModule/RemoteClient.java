@@ -25,8 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class RemoteClient {  
-	  
-	
+
 	private JPanel contentPane;
     Socket socket;  
     private static ObjectInputStream ins;
