@@ -80,7 +80,7 @@ public class RMouseListener implements MouseListener {
 		// TODO Auto-generated method stub
 		JButton btn = (JButton) e.getComponent();
 		btn.setForeground(Color.black);// ÉèÖÃ×ÖÌåÑÕÉ«
-		btn.setBorderPainted(false);// Òş²Ø±ß¿ò
+		//btn.setBorderPainted(false);// Òş²Ø±ß¿ò
 	}
 
 

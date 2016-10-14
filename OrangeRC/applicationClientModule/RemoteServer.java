@@ -8,9 +8,11 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.imageio.IIOException;
 import javax.imageio.stream.ImageOutputStream;
@@ -18,60 +20,36 @@ import javax.swing.ImageIcon;
 
 public class RemoteServer {  
 	  
-    private static Socket st;  
-  
-    public static void main(String[] args) {  
+    private static Socket st;
+    public static String ip;
+    public final static int USERNUM = 56;
+    private static int order = 0;
+    
+    
+    public static void main(String[] args) {
+    	//new Login();
+    	new GUI();
         ServerSocket server;  
         try {  
             server = new ServerSocket(1123);  
-            st = server.accept();   
-            // 两个线程，一个发送截屏，一个接收鼠标键盘并进行模拟操作  
-            new SendThread(st).start();  
+            st = server.accept();
+            ip = st.getInetAddress().getHostAddress();
         } catch (IOException e) {  
             e.printStackTrace();  
-        }  
-    }  
+        }
+        new Receive(st).start();
+    }
+    public static int getorder(){
+    	String[] ips = new String[USERNUM];
+    	for(int i=0;i<order;i++){
+    		if(ips[i].equals(ip)){
+    			return i;
+    		}
+    	}
+    	ips[order]=ip;
+    	order++;
+    	return order-1;
+    }
 }  
   
   
-class SendThread extends Thread {  
-    Robot robot;  
-    ObjectOutputStream os;  
-    BufferedOutputStream bos;  
-    ImageOutputStream ios;  
-    Rectangle rect;  
-    private boolean isAlive = true;  
-    Socket st;  
-  
-    public SendThread(Socket st) {  
-        this.st = st;  
-        try {
-            robot = new Robot();  
-            Point p = new Point(0, 0);  
-            // 获得屏幕大小  
-            Toolkit tool = Toolkit.getDefaultToolkit();  
-            Dimension dis = tool.getScreenSize();  
-            rect = new Rectangle(p, dis);  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
-    }  
-  
-    public void run() {  
-        try {  
-            os = new ObjectOutputStream(st.getOutputStream());  
-            BufferedImage img = null;  
-            while (isAlive) {  
-                // 根据矩形rect大小进行截屏，得到BUfferedImage对象  
-                img = robot.createScreenCapture(rect);  
-                // BUfferedImage序列化，先包装成ImageIcon再写出去  
-                ImageIcon icon = new ImageIcon(img);  
-                os.writeObject(icon);  
-                os.flush();  
-                Thread.sleep(1000);  
-            }  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
-    }  
-}  

@@ -33,50 +33,36 @@ public class GUI extends JFrame{
 	private JButton docuBtn = null;
 	private JButton screenBtn = null;
 	private JButton playBtn = null;
-	JLabel la_image= new JLabel();
-	ObjectInputStream ins;
+	public final static int USERNUM = RemoteServer.USERNUM; 
+	public static JButton[] la_image  = new JButton[USERNUM];
 	
 	public GUI(){
 		display();
-		ins =  RemoteClient.getIns();
-		new Receive(la_image,ins).start();
 	}
 	
 	private JPanel addJPanel() {
 		JPanel menuPanel = new JPanel();
 		menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
 		
-		controlBtn = createBtn("控制屏幕", "./image/control72x.png");
+		controlBtn = createBtn("控制屏幕", "./image/control72x.png",250,100);
 		menuPanel.add(controlBtn);
 
-
-		docuBtn = createBtn("文件传输","./image/document96x.png");
+		docuBtn = createBtn("文件传输","./image/document96x.png",250,100);
 		menuPanel.add(docuBtn);
 
-
-		screenBtn = createBtn("屏幕演示", "./image/screen96x.png");
+		screenBtn = createBtn("屏幕演示", "./image/screen96x.png",250,100);
 		menuPanel.add(screenBtn);
-
 		
-		playBtn = createBtn("关机", "./image/shutdown64x.png");
+		playBtn = createBtn("关机", "./image/shutdown64x.png",250,100);
 		menuPanel.add(playBtn);
 
 		return menuPanel;
 	}
 
-	/**
-	 * 创建工具栏按钮
-	 * 
-	 * @param text
-	 *            按钮名称
-	 * @param icon
-	 *            按钮图标所在路径
-	 * @return 返回添加样式和监听器后的按钮
-	 */
-	private JButton createBtn(String text, String icon) {
+	private JButton createBtn(String text, String icon,int w,int h) {
 		JButton btn = new JButton(text, new ImageIcon(icon));
 		btn.setUI(new BasicButtonUI());// 恢复基本视觉效果
-		btn.setPreferredSize(new Dimension(250, 100));// 设置按钮大小
+		btn.setPreferredSize(new Dimension(w, h));// 设置按钮大小
 		btn.setContentAreaFilled(false);// 设置按钮透明
 		btn.setFont(new Font("黑体", Font.PLAIN, 20));// 按钮文本样式
 		btn.setMargin(new Insets(0, 0, 0, 0));// 按钮内容与边框距离
@@ -93,30 +79,28 @@ public class GUI extends JFrame{
 		this.setLayout(null);
 		JLayeredPane jlp = new JLayeredPane();
 	    
-	    
-	    la_image.setBounds(20, 20, 300,200);
-	    la_image.setOpaque(true);
-
-
-	    jlp.add(la_image);
+		jlp.setLayout(new GridLayout(USERNUM/4+1,4,5,10));
+		
+		for(int i=0;i<USERNUM;i++){
+		    la_image[i] = createBtn(null,"./image/huaji.png",300,250);
+		    //la_image[i].setHorizontalTextPosition(JButton.CENTER);
+		    jlp.add(la_image[i]);
+		    la_image[i].setOpaque(true);
+		}
+		
 	    JPanel menuPanel = addJPanel();
-	  	menuPanel.setBorder(BorderFactory.createMatteBorder(5, 10, 5, 5, Color.BLUE));
+	  	menuPanel.setBorder(BorderFactory.createMatteBorder(2, 20, 2, 20, Color.gray));
 	  	
 	  	menuPanel.setBounds(0,550,1300, 150);
 	  	
-	  	//jlp.setLayout(new GridLayout(4,4));
+
 	  	jlp.setBorder(BorderFactory.createTitledBorder("屏幕分享"));
-	  	jlp.setBounds(0,0,1350,1080);
+	  	jlp.setBounds(0,0,1350,2000);
 	  	JScrollPane scroll = new JScrollPane(jlp);
 	  	scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//	  	scroll.setPreferredSize(new Dimension(jlp.getWidth() - 50, jlp.getHeight()/2));
-//	  	JScrollPane scr=new JScrollPane(jlp);
-//	  	scr.setHorizontalScrollBarPolicy( 
-//	  			JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
-//	  			scr.setVerticalScrollBarPolicy( 
-//	  			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
 
-	  	scroll.setBounds(0,0,jlp.getWidth() - 50, jlp.getHeight()/2);
+
+	  	scroll.setBounds(0,0,1300, 540);
 	  	this.getContentPane().add(menuPanel);
 	    this.getContentPane().add(scroll);
 	}

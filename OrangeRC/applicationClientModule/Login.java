@@ -10,6 +10,8 @@ public class Login extends JFrame{
     JLabel jLabel1,jLabel2;
     JPanel jp1,jp2,jp3;
     JButton jb1,jb2;
+    JLabel jl ;
+    
     private JButton createBtn(String text, String icon) {
 		JButton btn = new JButton(text, new ImageIcon(icon));
 		btn.setUI(new BasicButtonUI());// 恢复基本视觉效果
@@ -24,7 +26,7 @@ public class Login extends JFrame{
 	public Login(){
         jTextField = new JTextField(12);
         jPasswordField = new JPasswordField(12);
-        jLabel1 = new JLabel("用户名");
+        jLabel1 = new JLabel("用户名 ");
         jLabel2 = new JLabel(" 密码  ");
         jb1 = createBtn("确认","./image/yes.png");
         jb2 = createBtn("取消","./image/cancel.png");
@@ -33,26 +35,31 @@ public class Login extends JFrame{
         jp3 = new JPanel();
         
         //设置布局
-        this.setLayout(new GridLayout(3, 1,0,3));
+        this.setLayout(null);
         
         jp1.add(jLabel1); 
         jp1.add(jTextField);//第一块面板添加用户名和文本框 
-        jp1.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        jp1.setBounds(30, 230, 400, 40);
         
         jp2.add(jLabel2);
         jp2.add(jPasswordField);//第二块面板添加密码和密码输入框
-        jp2.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 12));
+        jp2.setBounds(30,280,400,40);
         
+        jp3.setLayout(new FlowLayout(FlowLayout.CENTER,40,5));
         jp3.add(jb1);
         jp3.add(jb2); //第三块面板添加确认和取消
-        jp3.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        jp3.setBounds(0,350,500,140);
+        
+        jl= new JLabel(new ImageIcon("./image/Login.jpg"));//setIcon(new ImageIcon("./image/Login.jpg"));
+        jl.setBounds(0,0,500,190);
         
         this.add(jp1);
         this.add(jp2);
         this.add(jp3);
+        this.add(jl);
         //设置显示
-        this.setSize(300, 250);
-        this.setLocation(500, 200);
+        this.setSize(500, 450);
+        this.setLocation(450, 170);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setTitle("登陆");

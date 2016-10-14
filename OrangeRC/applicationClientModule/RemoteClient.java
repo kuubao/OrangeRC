@@ -3,16 +3,22 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,39 +31,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class RemoteClient {  
-
-	private JPanel contentPane;
-    Socket socket;  
-    private static ObjectInputStream ins;
-    
-	public static ObjectInputStream getIns() {
-		return ins;
-	}
-
-	public static void setIns(ObjectInputStream ins) {
-		RemoteClient.ins = ins;
-	}
-
+	
 	public static void main(String[] args) {
-	        Socket socket = null;  
-	        try {  
-	            socket = new Socket("127.0.0.1", 1123);  
-	        } catch (UnknownHostException e) {  
-	            e.printStackTrace();  
-	        } catch (IOException e) {  
-	            e.printStackTrace();  
-	        }
-	        new RemoteClient(socket);
-    }
-
-    public RemoteClient(Socket socket) {  
-        this.socket = socket;  
+        Socket socket = null;  
         try {  
-            ins = new ObjectInputStream(socket.getInputStream());  
+            socket = new Socket("183.6.142.17", 1123);
+        } catch (UnknownHostException e) {  
+            e.printStackTrace();  
         } catch (IOException e) {  
             e.printStackTrace();  
         }
-        //new Login();
-        new GUI();
+        new SendThread(socket).start();
     }
-}  
+}
