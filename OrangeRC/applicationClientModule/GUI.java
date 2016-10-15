@@ -1,39 +1,28 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import java.io.ObjectInputStream;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicButtonUI;
-import javax.swing.text.html.ImageView;
 
 
+@SuppressWarnings("serial")
 public class GUI extends JFrame{
 	private JButton controlBtn = null;
 	private JButton docuBtn = null;
 	private JButton screenBtn = null;
 	private JButton playBtn = null;
-	public final static int USERNUM = RemoteServer.USERNUM; 
+	private final static int USERNUM = RemoteServer.USERNUM; 
 	public static JButton[] la_image  = new JButton[USERNUM];
 	
 	public GUI(){

@@ -50,7 +50,7 @@ public class Login extends JFrame{
         jp3.add(jb2); //第三块面板添加确认和取消
         jp3.setBounds(0,350,500,140);
         
-        jl= new JLabel(new ImageIcon("./image/Login.jpg"));//setIcon(new ImageIcon("./image/Login.jpg"));
+        jl= new JLabel(new ImageIcon("./image/Login.jpg"));
         jl.setBounds(0,0,500,190);
         
         this.add(jp1);

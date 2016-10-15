@@ -1,55 +1,51 @@
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-import javax.imageio.IIOException;
-import javax.imageio.stream.ImageOutputStream;
-import javax.swing.ImageIcon;
 
 public class RemoteServer {  
-	  
+    
+    public static final int USERNUM = 56;
+	private static String ip;
     private static Socket st;
-    public static String ip;
-    public final static int USERNUM = 56;
+    private static String[] ips = new String[USERNUM];
     private static int order = 0;
-    
-    
-    public static void main(String[] args) {
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+    	
+    	@SuppressWarnings("unused")
+		final int USERNUM = 56;
+    	
     	//new Login();
     	new GUI();
-        ServerSocket server;  
+        ServerSocket server = null;  
         try {  
-            server = new ServerSocket(1123);  
-            st = server.accept();
-            ip = st.getInetAddress().getHostAddress();
+            server = new ServerSocket(1123);
+			while(true){
+				try {
+					st = server.accept();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				ip = st.getInetAddress().getHostAddress();
+				new Receive(st, ip,getorder(ip)).start();
+			}
         } catch (IOException e) {  
             e.printStackTrace();  
         }
-        new Receive(st).start();
     }
-    public static int getorder(){
-    	String[] ips = new String[USERNUM];
+	public static int getorder(String oip){
     	for(int i=0;i<order;i++){
-    		if(ips[i].equals(ip)){
+    		if(ips[i].equals(oip)){
     			return i;
     		}
     	}
-    	ips[order]=ip;
+    	ips[order]=oip;
     	order++;
     	return order-1;
     }
+
 }  
   
   

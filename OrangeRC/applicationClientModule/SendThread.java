@@ -37,16 +37,15 @@ class SendThread extends Thread {
   
     public void run() {  
         try {  
-            os = new ObjectOutputStream(st.getOutputStream());  
+            os = new ObjectOutputStream(st.getOutputStream());
             BufferedImage img = null;  
-            while (isAlive) {  
-                // 根据矩形rect大小进行截屏，得到BUfferedImage对象  
+            while (isAlive) {
                 img = robot.createScreenCapture(rect);  
-                // BUfferedImage序列化，先包装成ImageIcon再写出去  
+                // BUfferedImage序列化
                 ImageIcon icon = new ImageIcon(img);  
                 os.writeObject(icon);  
                 os.flush();  
-                Thread.sleep(1000);  
+                Thread.sleep(1000);
             }  
         } catch (Exception e) {  
             e.printStackTrace();  
