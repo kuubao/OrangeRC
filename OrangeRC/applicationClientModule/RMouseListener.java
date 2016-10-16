@@ -4,47 +4,22 @@ import java.awt.event.MouseListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 public class RMouseListener implements MouseListener {
-
-	private GUI frame;
-	private Login frame2;
-	private AbstractButton jTextField;
-
+	public static boolean cl = false;
 	public RMouseListener() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public RMouseListener(GUI f) {
-		this.frame = f;
-	}
-	
-	public RMouseListener(Login s) {
-		this.frame2 = s;
-	}
-	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		String btnName =((JButton)e.getSource()).getText();
-		String Keyname = frame2.jTextField.getText().trim();
-		if ("确认".equals(btnName.trim())) {
-			if("14251104235".equals(Keyname)){
-					frame2.dispose();
-					JOptionPane.showMessageDialog(null,"登陆成功！","提示",JOptionPane.DEFAULT_OPTION);
-					new GUI();
-				}
-			else {
-                JOptionPane.showMessageDialog(null,"用户名或密码错误！","提示",JOptionPane.ERROR_MESSAGE);	
-			}
-		}
-		if ("取消".equals(btnName.trim())){
-			frame2.jTextField.setText(null);
-			frame2.jPasswordField.setText(null);
+		if("控制屏幕".equals(btnName.trim())){
+			JOptionPane.showMessageDialog(null,"请双击选择一位学生","提示",JOptionPane.DEFAULT_OPTION);
+			cl=true;
 		}
 	}
 
@@ -68,7 +43,7 @@ public class RMouseListener implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		JButton btn = (JButton) e.getComponent();
-		btn.setForeground(new Color(0x33, 0x66, 0xcc));// 设置字体颜色
+		btn.setForeground(/*new Color(0x33, 0x66, 0xcc)*/Color.WHITE);// 设置字体颜色
 		btn.setBorderPainted(true);// 显示边框
 		Border etchedBorder = new EtchedBorder(EtchedBorder.LOWERED);// 设置边框凹显
 		btn.setBorder(etchedBorder);

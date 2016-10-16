@@ -5,7 +5,7 @@ import java.net.Socket;
 
 public class RemoteServer {  
     
-    public static final int USERNUM = 56;
+    public static final int USERNUM = 60;
 	private static String ip;
     private static Socket st;
     private static String[] ips = new String[USERNUM];
@@ -45,7 +45,6 @@ public class RemoteServer {
     	order++;
     	return order-1;
     }
-
 }  
   
   

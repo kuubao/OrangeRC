@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -43,18 +44,26 @@ public class Receive extends Thread {
 						e1.printStackTrace();
 					}
 	                Image img = icon.getImage();
-	                BufferedImage bi = resize(img,300,200);
+	                BufferedImage bi = resize(img,380,220);
+	                BufferedImage ai = resize(img,1000,720);
+	                BigScreen.la.setIcon(new ImageIcon(ai));
 	                GUI.la_image[s].setIcon(new ImageIcon(bi));
 	                GUI.la_image[s].setText(ip);
-	                GUI.la_image[s].setVerticalTextPosition(JButton.BOTTOM);
-	                GUI.la_image[s].setHorizontalTextPosition(JButton.CENTER);
-	                GUI.la_image[s].setIconTextGap(15);
+	                GUI.la_image[s].setIconTextGap(4);
 	                try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+	                try { 
+	                	st.sendUrgentData(0); 
+	                	} catch (IOException e) { 
+	                		isAlive = false;    //如果抛出了异常，那么就是断开连接了  跳出无限循环
+	                		GUI.la_image[s].setIcon(new ImageIcon("./image/huaji.png"));
+	                		GUI.la_image[s].setText("主机"+s);
+	                		GUI.la_image[s].setIconTextGap(15);
+	                }
 				}
          }
         private BufferedImage resize(Image img, int newW, int newH) {

@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,21 +31,26 @@ public class GUI extends JFrame{
 	}
 	
 	private JPanel addJPanel() {
-		JPanel menuPanel = new JPanel();
-		menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 20));
+		JPanel menuPanel = new BackgroundPane(new ImageIcon("./image/menubb.jpg").getImage());
+		//JPanel menuPanel = new JPanel();
+		menuPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		
-		controlBtn = createBtn("控制屏幕", "./image/control72x.png",250,100);
+		controlBtn = createBtn("控制屏幕", "./image/control64.png",150,140);
 		menuPanel.add(controlBtn);
+		//controlBtn.addMouseListener(new RMouseListener());
 
-		docuBtn = createBtn("文件传输","./image/document96x.png",250,100);
+		docuBtn = createBtn("文件传输","./image/document64.png",150,140);
 		menuPanel.add(docuBtn);
-
-		screenBtn = createBtn("屏幕演示", "./image/screen96x.png",250,100);
-		menuPanel.add(screenBtn);
+		//docuBtn.addMouseListener(new RMouseListener());
 		
-		playBtn = createBtn("关机", "./image/shutdown64x.png",250,100);
+		screenBtn = createBtn("屏幕演示", "./image/computer64.png",150,140);
+		menuPanel.add(screenBtn);
+		//screenBtn.addMouseListener(new RMouseListener());
+		
+		playBtn = createBtn("关机重启", "./image/shutdown64.png",150,140);
 		menuPanel.add(playBtn);
-
+		//playBtn.addMouseListener(new RMouseListener());
+		
 		return menuPanel;
 	}
 
@@ -53,44 +59,48 @@ public class GUI extends JFrame{
 		btn.setUI(new BasicButtonUI());// 恢复基本视觉效果
 		btn.setPreferredSize(new Dimension(w, h));// 设置按钮大小
 		btn.setContentAreaFilled(false);// 设置按钮透明
-		btn.setFont(new Font("黑体", Font.PLAIN, 20));// 按钮文本样式
+		btn.setFont(new Font("黑体", Font.PLAIN, 25));// 按钮文本样式
 		btn.setMargin(new Insets(0, 0, 0, 0));// 按钮内容与边框距离
-		btn.addMouseListener(new RMouseListener(this));
+        btn.setVerticalTextPosition(JButton.BOTTOM);
+        btn.setHorizontalTextPosition(JButton.CENTER);
+        btn.addMouseListener(new RMouseListener());
+		btn.setIconTextGap(15);
 		return btn;
 	}
 	private void display(){
 		
-		this.setSize(1320, 750);
+		this.setSize(1310, 730);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setTitle("OrangeRC");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(null);
-		JLayeredPane jlp = new JLayeredPane();
-	    
-		jlp.setLayout(new GridLayout(USERNUM/4+1,4,5,10));
+		
+		JLabel jls = new JLabel(new ImageIcon("./image/menub.jpg"));
+	  	jls.setBounds(0, 0, 1300,120);
+		
+		JPanel jlp = new BackgroundPane(new ImageIcon("./image/background.jpg").getImage());
+		jlp.setLayout(new GridLayout(USERNUM/3+1,3,5,5));
 		
 		for(int i=0;i<USERNUM;i++){
-		    la_image[i] = createBtn(null,"./image/huaji.png",300,250);
-		    //la_image[i].setHorizontalTextPosition(JButton.CENTER);
+		    la_image[i] = createBtn("主机 "+i,"./image/huaji.png",300,250);
 		    jlp.add(la_image[i]);
-		    la_image[i].setOpaque(true);
+		    la_image[i].addMouseListener(new CMouseListener(i));
+		    //la_image[i].setOpaque(true);
 		}
 		
 	    JPanel menuPanel = addJPanel();
-	  	menuPanel.setBorder(BorderFactory.createMatteBorder(2, 20, 2, 20, Color.gray));
-	  	
-	  	menuPanel.setBounds(0,550,1300, 150);
-	  	
+	  	menuPanel.setBounds(0,120,150, 580);
+	  	menuPanel.setBorder(BorderFactory.createMatteBorder(15, 1, 1, 1, Color.white));
 
-	  	jlp.setBorder(BorderFactory.createTitledBorder("屏幕分享"));
-	  	jlp.setBounds(0,0,1350,2000);
 	  	JScrollPane scroll = new JScrollPane(jlp);
 	  	scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-
-	  	scroll.setBounds(0,0,1300, 540);
+	  	scroll.setBorder(BorderFactory.createTitledBorder("屏幕分享"));
+	  	scroll.setBounds(150,120,1150, 580);
+	  	scroll.setBackground(Color.white);
 	  	this.getContentPane().add(menuPanel);
+	  	this.getContentPane().add(jls);
 	    this.getContentPane().add(scroll);
+	    this.getContentPane().setBackground(Color.white);
 	}
 }

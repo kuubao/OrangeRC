@@ -19,7 +19,7 @@ public class Login extends JFrame{
 		btn.setContentAreaFilled(false);// 设置按钮透明
 		btn.setFont(new Font("黑体", Font.PLAIN, 20));// 按钮文本样式
 		btn.setMargin(new Insets(0, 0, 0, 0));// 按钮内容与边框距离
-		btn.addMouseListener(new RMouseListener(this));
+		btn.addMouseListener(new LMouseListener(this));
 		return btn;
 	}
     @SuppressWarnings("deprecation")
