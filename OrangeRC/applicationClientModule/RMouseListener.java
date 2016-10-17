@@ -18,8 +18,12 @@ public class RMouseListener implements MouseListener {
 		// TODO Auto-generated method stub
 		String btnName =((JButton)e.getSource()).getText();
 		if("控制屏幕".equals(btnName.trim())){
-			JOptionPane.showMessageDialog(null,"请双击选择一位学生","提示",JOptionPane.DEFAULT_OPTION);
-			cl=true;
+			cl=(cl==true?false:true);
+			if(cl==true){
+				JOptionPane.showMessageDialog(null,"开启控制屏幕功能\n请双击选择一位学生！\n再次点击控制屏幕按钮可取消","提示",JOptionPane.DEFAULT_OPTION);
+			}else{
+				JOptionPane.showMessageDialog(null,"关闭控制屏幕功能\n","提示",JOptionPane.DEFAULT_OPTION);
+			}
 		}
 	}
 

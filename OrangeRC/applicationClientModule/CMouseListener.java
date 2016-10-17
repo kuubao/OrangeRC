@@ -1,11 +1,5 @@
 import java.awt.event.MouseEvent;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-
 
 public class CMouseListener extends RMouseListener {
 	@SuppressWarnings("unused")
@@ -19,9 +13,8 @@ public class CMouseListener extends RMouseListener {
 		// TODO Auto-generated method stub
 		String btnName =((JButton)e.getSource()).getText();
 		if(e.getClickCount()==2){
-			//System.out.println("hshshshsh");
 			if(RMouseListener.cl==true){
-				new BigScreen("btnName");
+				new BigScreen(RemoteServer.ip);
 			}
 		}
 	}

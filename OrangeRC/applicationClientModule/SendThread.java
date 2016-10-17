@@ -48,7 +48,8 @@ class SendThread extends Thread {
                 Thread.sleep(1000);
             }  
         } catch (Exception e) {  
-        	//e.printStackTrace();  
+        	//e.printStackTrace();
+        	System.exit(0);
         }  
     }  
 }

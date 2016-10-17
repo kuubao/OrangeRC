@@ -6,7 +6,7 @@ import java.net.Socket;
 public class RemoteServer {  
     
     public static final int USERNUM = 60;
-	private static String ip;
+	public static String ip;
     private static Socket st;
     private static String[] ips = new String[USERNUM];
     private static int order = 0;
@@ -29,10 +29,10 @@ public class RemoteServer {
 					e.printStackTrace();
 				}
 				ip = st.getInetAddress().getHostAddress();
-				new Receive(st, ip,getorder(ip)).start();
+				new Receive(st,getorder(ip)).start();
 			}
         } catch (IOException e) {  
-            e.printStackTrace();  
+            e.printStackTrace();
         }
     }
 	public static int getorder(String oip){

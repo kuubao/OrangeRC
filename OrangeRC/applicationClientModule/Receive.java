@@ -21,16 +21,15 @@ public class Receive extends Thread {
 		ImageIcon icon;
 		private Socket st;
 		private ObjectInputStream ins;
-		private static String ip;
+		
 		private int s = 0;
 		
-	    public Receive(Socket st,String ip,int order) {
+	    public Receive(Socket st,int order) {
 			this.st = st;
-			Receive.ip = ip;
 			this.s = order;
 		}
 		public void run() {
-			try {  
+			try {
 	            ins = new ObjectInputStream(st.getInputStream());  
 	        } catch (IOException e) {  
 	            e.printStackTrace();  
@@ -48,7 +47,7 @@ public class Receive extends Thread {
 	                BufferedImage ai = resize(img,1000,720);
 	                BigScreen.la.setIcon(new ImageIcon(ai));
 	                GUI.la_image[s].setIcon(new ImageIcon(bi));
-	                GUI.la_image[s].setText(ip);
+	                GUI.la_image[s].setText(RemoteServer.ip);
 	                GUI.la_image[s].setIconTextGap(4);
 	                try {
 						Thread.sleep(1000);
@@ -61,6 +60,8 @@ public class Receive extends Thread {
 	                	} catch (IOException e) { 
 	                		isAlive = false;    //如果抛出了异常，那么就是断开连接了  跳出无限循环
 	                		GUI.la_image[s].setIcon(new ImageIcon("./image/huaji.png"));
+	                		BigScreen.la.setIcon(new ImageIcon("./image/CE.jpg"));
+	                		BigScreen.la.setBounds(0, 0, 1000, 700);
 	                		GUI.la_image[s].setText("主机"+s);
 	                		GUI.la_image[s].setIconTextGap(15);
 	                }
