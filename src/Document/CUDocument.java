@@ -15,7 +15,7 @@ import javax.swing.JFileChooser;
 public class CUDocument extends Thread{
 	private String ip = "127.0.0.1";// 设置成服务器IP
 	private int port = 8822;//设置端口号
-	public void start(){
+	public void run(){
 		//接受客户端的下载请求，将本地文件传输给客户端
 		try {
 			while (true) {
@@ -67,6 +67,10 @@ public class CUDocument extends Thread{
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+	}
+	
+	public static void main(String[] args){
+		new CUDocument().start();
 	}
 }
 	

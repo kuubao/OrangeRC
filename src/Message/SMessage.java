@@ -9,20 +9,20 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * æ•™å¸ˆç«¯æ¥æ”¶ä¿¡æ¯
+ * ½ÌÊ¦¶Ë½ÓÊÕĞÅÏ¢
  */
 
 
-//æ•™å¸ˆéœ€è¦å¼€æœºè‡ªåŠ¨è¿è¡Œç«¯å£
-//ç­‰å¾…å­¦ç”Ÿæ‰“å¼€å®¢æˆ·ç«¯
-//æ•™å¸ˆç«¯æ¥æ”¶æ•°æ®
+//½ÌÊ¦ĞèÒª¿ª»ú×Ô¶¯ÔËĞĞ¶Ë¿Ú
+//µÈ´ıÑ§Éú´ò¿ª¿Í»§¶Ë
+//½ÌÊ¦¶Ë½ÓÊÕÊı¾İ
 
 public class SMessage extends ServerSocket{
 	private static int port=10000;
 	public SMessage() throws IOException {
 		super(port);
 		try{
-			System.out.println("å¯åŠ¨æœåŠ¡å™¨");
+			System.out.println("Æô¶¯·şÎñÆ÷");
 			while(true){
 				Socket socket=this.accept();
 				new ServerThread(socket);
@@ -50,7 +50,7 @@ public class SMessage extends ServerSocket{
 //			os=socket.getOutputStream();
 //			osw=new OutputStreamWriter(os);
 //			bw=new BufferedWriter(osw);
-//			//readLine()å¿…é¡»æœ‰ç»“æŸæ ‡å¿—\r\n
+//			//readLine()±ØĞëÓĞ½áÊø±êÖ¾\r\n
 //			bw.write("nihao\n\r");
 //			bw.flush();
 //			bw.close();

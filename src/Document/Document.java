@@ -3,39 +3,31 @@ package Document;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.SocketException;
-
-import javax.swing.JFileChooser;
-
 /**
- * 教师接收文件   
+ * 教师端调用
+ * @author Administrator
+ *
  */
-public class SDDocument extends Thread{
+public class Document extends Thread{
 
-	private String ip = "127.0.0.1";// 设置成服务器IP
-	private int port = 8822;//设置端口号
+	private Socket socket;
+	public Document(Socket socket) {
+		super();
+		this.socket=socket;
+		this.start();
+	}
+	@Override
 	public void run(){
 		//从服务器端下载文件
 		try { 
-//			Socket socket = new Socket(ip,port);
-			while(true){  
-				Socket socket = new Socket(ip,port);
 				DataInputStream is = new  DataInputStream(socket.getInputStream());   
 				OutputStream os = socket.getOutputStream();                  
-
-	/////////////////////////////////////////			
-				JFileChooser jf=new JFileChooser();
-				jf.setFileSelectionMode(jf.FILES_AND_DIRECTORIES);
-				jf.showSaveDialog(null);
-				
-				File file=jf.getSelectedFile();
-				String filename=jf.getSelectedFile().getPath();
-	//////////////////////////////////////////////			
+				//1、得到文件名       
+				String filename="E:\\";
 				filename += is.readUTF(); 
 
 				System.out.println("新生成的文件名为:"+filename);  
@@ -53,7 +45,6 @@ public class SDDocument extends Thread{
 				dos.close();               
 				is.close();  
 				socket.close();  
-			}  
 
 		} catch (IOException e) {  
 			// TODO Auto-generated catch block  
@@ -61,8 +52,4 @@ public class SDDocument extends Thread{
 		}  
 	}
 	
-
-	public static void main(String[] args){
-		new SDDocument().start();
-	}
 }

@@ -9,7 +9,7 @@ import java.net.Socket;
 public class ServerThread extends Thread{
 	private Socket socket;
 	private BufferedReader br;
-	public ServerThread(Socket socket){
+	public ServerThread(Socket s){
 		super();
 		this.socket=socket;
 		try{
@@ -21,9 +21,9 @@ public class ServerThread extends Thread{
 	@Override
 	public void run() {
 		try{
-			//å¾—åˆ°å­¦ç”Ÿç«¯çš„è¾“å…¥æµ
+			//µÃµ½Ñ§Éú¶ËµÄÊäÈëÁ÷
 			br=new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			//æ§åˆ¶å°è¾“å…¥ä¿¡æ¯
+			//¿ØÖÆÌ¨ÊäÈëĞÅÏ¢
 			System.out.println(br.readLine());
 			socket.close();
 		}catch(IOException e){

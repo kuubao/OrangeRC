@@ -12,22 +12,22 @@ import java.net.UnknownHostException;
 import java.io.BufferedReader;
 
 /**
- * å­¦ç”Ÿç«¯å‘é€ä¿¡æ¯
+ * Ñ§Éú¶Ë·¢ËÍĞÅÏ¢
  */
 
-//ç‚¹å‡»å‘é€ä¿¡æ¯ï¼Œå¼€å§‹è¿æ¥
+//µã»÷·¢ËÍĞÅÏ¢£¬¿ªÊ¼Á¬½Ó
 public class CMessage {
 	private Socket socket;
 	private PrintWriter out;
 	private int count=1;
 	
 	public CMessage(){
-		//å±è”½this(null)å­¦ç”Ÿè¾“å…¥ä¸€ä¸ªä¿¡æ¯åè‡ªåŠ¨é€€å‡º
+		//ÆÁ±Îthis(null)Ñ§ÉúÊäÈëÒ»¸öĞÅÏ¢ºó×Ô¶¯ÍË³ö
 //		this(null);
 		this.connect();
 	}
 	
-	//æ­¤æ–¹æ³•ç”¨äºåˆ¤æ–­å­¦ç”Ÿ
+	//´Ë·½·¨ÓÃÓÚÅĞ¶ÏÑ§Éú
 	public CMessage(String clientName){
 		this.connect(clientName);
 	}
@@ -35,11 +35,11 @@ public class CMessage {
 	private void connect() {
 		try{
 			socket=new Socket("127.0.0.1",10000);
-			System.out.println("è¯·è¾“å…¥ä¿¡æ¯");
+			System.out.println("ÇëÊäÈëĞÅÏ¢");
 			out=new PrintWriter(socket.getOutputStream());
-			//ä»æ§åˆ¶å°è¾“å…¥ä¿¡æ¯
+			//´Ó¿ØÖÆÌ¨ÊäÈëĞÅÏ¢
 			BufferedReader line=new BufferedReader(new InputStreamReader(System.in));
-			//è¾“å…¥ä¿¡æ¯åˆ°æœåŠ¡å™¨
+			//ÊäÈëĞÅÏ¢µ½·şÎñÆ÷
 			
 			out.println(line.readLine());
 			out.close();
@@ -53,11 +53,11 @@ public class CMessage {
 	private void connect(String name) {
 		try{
 			socket=new Socket("127.0.0.1",10000);
-			System.out.println("è¯·è¾“å…¥ä¿¡æ¯");
+			System.out.println("ÇëÊäÈëĞÅÏ¢");
 			out=new PrintWriter(socket.getOutputStream());
-			//ä»æ§åˆ¶å°è¾“å…¥ä¿¡æ¯
+			//´Ó¿ØÖÆÌ¨ÊäÈëĞÅÏ¢
 			BufferedReader line=new BufferedReader(new InputStreamReader(System.in));
-			//è¾“å…¥ä¿¡æ¯åˆ°æœåŠ¡å™¨
+			//ÊäÈëĞÅÏ¢µ½·şÎñÆ÷
 			
 			out.println(name+line.readLine());
 			out.close();
@@ -73,7 +73,7 @@ public class CMessage {
 }
 
 ///**
-// * å­¦ç”Ÿç«¯å‘é€æ¶ˆæ¯
+// * Ñ§Éú¶Ë·¢ËÍÏûÏ¢
 // * @author Administrator
 // *
 // */
@@ -86,9 +86,9 @@ public class CMessage {
 //	public void run(){
 //		try {
 //			server =new ServerSocket(8888);
-//			System.out.println("ç­‰å¾…è¿æ¥");
+//			System.out.println("µÈ´ıÁ¬½Ó");
 //			Socket socket=server.accept();
-////			System.out.println(socket.getRemoteSocketAddress()+"è¿æ¥");
+////			System.out.println(socket.getRemoteSocketAddress()+"Á¬½Ó");
 //			is=socket.getInputStream();
 //			os=socket.getOutputStream();
 //		} catch (UnknownHostException e) {

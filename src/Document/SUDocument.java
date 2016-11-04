@@ -27,7 +27,7 @@ public class SUDocument extends Thread{
 		try {
 			ServerSocket server= new ServerSocket(port);
 			//        Socket socket = new Socket(ip,port); 
-			while (true) {
+//			while (true) {
 
 				//            	String filePath="C:\\Users\\Administrator\\Desktop\\a\\电脑知识\\1.docx";
 				// 创建文件选择器
@@ -71,13 +71,13 @@ public class SUDocument extends Thread{
 				fis.close();
 				socket.close();                
 				System.out.println("文件传输完成");
-			}
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}  
 	}
 	public static void main(String arg[]) {
-		new CDocument().start();;
+		new SUDocument().start();;
 	}
 }  
 
